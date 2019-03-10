@@ -1,7 +1,11 @@
+/**此文件为第一个app拷贝本版
+ * 组件未拆分
+ * 代码未优化 
+ * 作为后续版本的对比参照*/
+
 import React, { Component, Fragment} from 'react';
 import './style.css' 
-import TodoItem from './TodoItem.js'
-
+ 
 class TodoList extends Component {
     constructor(props) {  //构造函数
         super(props);  //调用父类的构造函数
@@ -26,12 +30,14 @@ class TodoList extends Component {
                 <ul>
                   {this.state.list.map((item,index) => {
                       return (
-                          <TodoItem 
-                          content={item} 
-                          index={index} 
-                          deleteItem={this.handleItemDelete.bind(this)}
-                          /> // 将数据和方法传给子组件。
-                    ) 
+                      <li 
+                        key ={index} //循环渲染时，需给循环的每一项增加一个唯一key值，此处暂用下标index替代.
+                        onClick = {this.handleItemDelete.bind(this,index)} //绑定事件，执行删除项方法,同时将下标index传给方法
+                        // dangerouslySetInnerHTML={{__html: item}} {/*不转义输入的标签，如输入<h1>hello<h1>则以标题显示输入的内容*/}   
+                      >  
+                                       
+                        {item}
+                      </li>) 
                   })
                     }
                 </ul>
