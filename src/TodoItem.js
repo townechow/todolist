@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import PropTypes from 'prop-types'; 
 
 class TodoItem extends Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class TodoItem extends Component {
     }
 
     render() {
-        const content = this.props.content; {/**接收父组件传过来的数据item */}
+        const {content, test} = this.props; {/**接收父组件传过来的数据item */}
         
         return (
             <Fragment>
@@ -32,4 +33,14 @@ class TodoItem extends Component {
     }
 }
 
+// 限定子组件接受数据的类型
+TodoItem.protoTypes = {
+    test : PropTypes.String,
+    content:PropTypes.String,
+    deleteItem: PropTypes.func,
+    index: PropTypes.number
+}
+TodoItem.defaultProps = {
+    test: '默认值'
+}
 export default TodoItem;
