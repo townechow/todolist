@@ -1,3 +1,31 @@
 .input {
     background-color: #ff44ff;
 }
+
+.show {
+    opacity: 1;
+    transition: all 1s ease-in; 
+    /* 所以css属性的切换 通过1s 的时间过渡 */
+}
+/* .hide {
+    opacity: 0;
+    transition: all 1s ease-in;
+} */
+.hide {
+    animation: hide-item 2s ease-in forwards;
+} /* forwards 参数保存动画的最后一帧的效果1*/
+
+@keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: blue;
+    }
+    100% {
+        opacity: 0;
+        color: green;
+    }
+}
