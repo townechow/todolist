@@ -6,9 +6,17 @@ class TodoItem extends Component {
         super(props);
         this.handleClick = this.handleClick.bind(this); // 绑定this指向，这样写节约性能
     }
-
+    // 判断此子组件的render是否要执行，性能节约。
+    shouldComponentUpdate(nextProps,nextState) {
+        if(nextProps.content !== this.props.content) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+   
     render() {
-        const {content, test} = this.props; {/**接收父组件传过来的数据item */}
+        const {content} = this.props; {/**接收父组件传过来的数据item */}
         
         return (
             <Fragment>
@@ -33,14 +41,12 @@ class TodoItem extends Component {
     }
 }
 
-// 限定子组件接受数据的类型
+// 限定 子组件接受数据的类型
 TodoItem.protoTypes = {
-    test : PropTypes.String,
+    
     content:PropTypes.String,
     deleteItem: PropTypes.func,
     index: PropTypes.number
 }
-TodoItem.defaultProps = {
-    test: '默认值'
-}
+
 export default TodoItem;

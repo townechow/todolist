@@ -1,6 +1,7 @@
 import React, { Component, Fragment} from 'react';
 import TodoItem from './TodoItem.js'
 import './style.css' 
+import axios from 'axios';
 
 class TodoList extends Component {
     constructor(props) {  //构造函数
@@ -23,8 +24,9 @@ class TodoList extends Component {
                     <input 
                     id="insertArea" 
                     className = 'input'
-                    value = {this.state.inputValue} //与状态中的数据绑定
-                    onChange={this.handleInputChange} // 事件绑定==>监听改变，执行相应方法，方法需定义,绑定this指向。
+                    value = {this.state.inputValue} // 与状态中的数据绑定
+                    onChange = {this.handleInputChange} // 事件绑定==>监听改变，执行相应方法，方法需定义,绑定this指向。
+                    // ref = {(input) => {this.input = input}} // ref 参数获取元素对应的DOM
                     /> 
                     <button onClick={this.handleBtnClick}>提交</button>
                 </div>
@@ -34,8 +36,23 @@ class TodoList extends Component {
             </Fragment>
         )
     }
+    // 发起Ajax请求，并将返回的数据加载到页面上
+    componentDidMount() {
+        axios.get('/api/todolist')
+            .then((res) => {
+                console.log(res.data);
+                this.setState(() => ({
+                    list: [...res.data]
+                }));
+                // this.setState(() => {
+                //     return {
+                //         list: [res.data]
+                //     }
+                // }); 
+            })
+            .catch(() => {alert('errorr')})
+    }
     
-    // 
     getTodoItem(){
        return this.state.list.map((item,index) => {
             return (
@@ -52,8 +69,9 @@ class TodoList extends Component {
 
     // 方法：监听改变，将改变的值传入数据inputValue.
     handleInputChange(e) {
-    //    console.log(e.target.value)  //获取输入框的值
-        const value = e.target.value;
+    //    console.log(e.target.value)  // 获取输入框的值
+          const value = e.target.value;
+        // const value = this.input.value; // 通过操作DOM的方式获取
         this.setState(() =>({
             inputValue: value
         })); 
