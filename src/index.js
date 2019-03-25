@@ -1,8 +1,8 @@
 import React   from 'react';
 import ReactDOM from 'react-dom';
 // import TodoList from './TodoList.js';
-import App from './App';
+import Antd from './antd';
 
 
-ReactDOM.render( <App/>, document.getElementById('root'));
+ReactDOM.render( <Antd/>, document.getElementById('root'));
 

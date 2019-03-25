@@ -1,3 +1,5 @@
+// 通过点击按钮时事件，改变状态数据，标签的类名再根据状态数据的改变而改变，从而实现杨思的添加与删除
+
 import React, {Component,Fragment} from 'react';
 import './style2.css';
 import { CSSTransition } from 'react-transition-group';
@@ -16,7 +18,7 @@ class App extends Component {
         <Fragment>
             <CSSTransition
                 in = {this.state.show}
-                timeout = {1000}
+                timeout = {1000} 
                 classNames ='fade'
                 unmountOnExit //删除节点
                 onEnter = {(el) => {el.style.color='blue'}} // 通过钩子函数改变样式，参数el为节点
@@ -35,7 +37,7 @@ class App extends Component {
             show: this.state.show ? false : true // 若this.state.show为true则false，反之则true。
         })
     }
-    // 通过点击按钮时事件，改变状态数据，标签的类名再根据状态数据的改变而改变，
+
 }
 
 
