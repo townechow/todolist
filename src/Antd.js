@@ -5,6 +5,7 @@ import React ,{Component} from 'react';
 import  {Input,Button,List} from 'antd';
 import 'antd/dist/antd.css';
 import store from './store/index.js'
+import {CHANGE_INPUT_VALUE,ADD_TODO_ITEM,DELETE_TODO_ITEM} from './store/actionType.js'
 // const data = [
 //     'Racing car sprays burning fuel into crowd.'];
 
@@ -54,7 +55,7 @@ class Antd extends Component {
 
     handleInputChange(e){
         const action = { // 创建action对象
-            type:'change_input_value', // type字段，确定action类型，每个action必须有。
+            type:CHANGE_INPUT_VALUE, // type字段，确定action类型，每个action必须有。
             value: e.target.value
         }
         store.dispatch(action) //将action传给store
@@ -66,14 +67,14 @@ class Antd extends Component {
     }
     handleBtnClick(){
         const action = {
-            type: 'add_todo_item'  //创建一个action对象
+            type: ADD_TODO_ITEM  //创建一个action对象
         }
         store.dispatch(action);  // 将action对象传给store
         console.log('onclick事件增加，action带话给reducer更改store数据')
     } 
     handleItemDelet(index) {
        const action = {
-           type: 'delete_todo_ietm',
+           type: DELETE_TODO_ITEM,
            index //
        }
        store.dispatch(action)
