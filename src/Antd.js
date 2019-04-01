@@ -5,7 +5,7 @@ import React ,{Component} from 'react';
 import  {Input,Button,List} from 'antd';
 import 'antd/dist/antd.css';
 import store from './store/index.js'
-import {CHANGE_INPUT_VALUE,ADD_TODO_ITEM,DELETE_TODO_ITEM} from './store/actionType.js'
+import {getInputChangeAction, getAddItemAction, getDeleteItemAction } from './store/actionCreators'
 // const data = [
 //     'Racing car sprays burning fuel into crowd.'];
 
@@ -54,11 +54,12 @@ class Antd extends Component {
     }
 
     handleInputChange(e){
-        const action = { // 创建action对象
-            type:CHANGE_INPUT_VALUE, // type字段，确定action类型，每个action必须有。
-            value: e.target.value
-        }
-        store.dispatch(action) //将action传给store
+        // const action = {             // 创建action对象
+        //     type:CHANGE_INPUT_VALUE, // type字段，确定action类型，每个action必须有。
+        //     value: e.target.value
+        // }
+        const action = getInputChangeAction(e.target.value); // 通过调用函数创建action函数
+        store.dispatch(action); //将action传给store
         console.log('onchange事件，输入框的值经由action带话给reducer 传给store')
     }
     handleStoreChange(){
@@ -66,19 +67,21 @@ class Antd extends Component {
         console.log('监听store事件，获取store中的数据并传给组件state')
     }
     handleBtnClick(){
-        const action = {
-            type: ADD_TODO_ITEM  //创建一个action对象
-        }
+        // const action = {
+        //     type: ADD_TODO_ITEM  //创建一个action对象
+        // }
+        const action = getAddItemAction();
         store.dispatch(action);  // 将action对象传给store
         console.log('onclick事件增加，action带话给reducer更改store数据')
     } 
     handleItemDelet(index) {
-       const action = {
-           type: DELETE_TODO_ITEM,
-           index //
-       }
-       store.dispatch(action)
-       console.log('传递下标 删除项')
+        //const action = {
+        //    type: DELETE_TODO_ITEM,
+        //    index //
+        //}
+        const action = getDeleteItemAction(index);
+        store.dispatch(action);
+        console.log('传递下标 删除项')
     }
 }
 export default Antd;
