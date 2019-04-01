@@ -2,7 +2,7 @@
 // 利用 antd 模块快速实现后台页面布局
 
 import React ,{Component} from 'react';
-import  {Input,Button,List} from 'antd';
+import TodoListUI from './TodoListUI'; 
 import 'antd/dist/antd.css';
 import store from './store/index.js'
 import {getInputChangeAction, getAddItemAction, getDeleteItemAction } from './store/actionCreators'
@@ -17,6 +17,7 @@ class Antd extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleStoreChange = this.handleStoreChange.bind(this);
         this.handleBtnClick = this.handleBtnClick.bind(this);
+        this.handleItemDelet = this.handleItemDelet.bind(this);
         
 
         store.subscribe(this.handleStoreChange); // 订阅strore 的改变，然后执行方法
@@ -25,31 +26,13 @@ class Antd extends Component {
 
     render() {
         return (
-            <div>
-                <div style={{marginLeft:'20px'}}>
-                <Input value={this.state.inputValue} 
-                placeholder="re info" 
-                style={{width:'300px',marginTop:'20px'}} 
-                onChange={this.handleInputChange}
-                />
-                <Button 
-                style={{marginLeft:'15px'}}
-                onClick={this.handleBtnClick}
-                >提交
-                </Button>
-                <List
-                style={{marginTop:'20px',width:'300px'}}
-                bordered
-                dataSource={this.state.list}
-                renderItem={(item,index) => (
-                <List.Item 
-                onClick={this.handleItemDelet.bind(this,index)}
-                >{item}
-                </List.Item>)}
-                />
-                </div>
-            </div>
-
+            <TodoListUI
+            inputValue = {this.state.inputValue} // 通过属性将值传给子组件
+            list = {this.state.list}
+            handleInputChange ={this.handleInputChange} // 通过属性将方法传给子组件
+            handleBtnClick = {this.handleBtnClick} 
+            handleItemDelet = {this.handleItemDelet}
+            />
         )
     }
 
