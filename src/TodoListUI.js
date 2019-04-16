@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import  {Input,Button,List} from 'antd';
 
+// 无状态组件
 const TodoListUI = (props) => {
     return (<div>
         <div style={{marginLeft:'20px'}}>
@@ -23,12 +24,12 @@ const TodoListUI = (props) => {
         renderItem={(item,index) => (
         <List.Item 
         // onClick={this.state.handleItemDelet.bind(this,index)}
-        onClick={(index) => {props.handleItemDelet(index)}}
+        onClick={() => {props.handleItemDelet(index)}}
         >{item}
         </List.Item>)}
         />
         </div>
-    </div>
+    </div> 
 
     )
 }

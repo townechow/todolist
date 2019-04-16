@@ -5,7 +5,9 @@ import React ,{Component} from 'react';
 import TodoListUI from './TodoListUI'; 
 import 'antd/dist/antd.css';
 import store from './store/index.js'
-import {getInputChangeAction, getAddItemAction, getDeleteItemAction } from './store/actionCreators'
+
+import {getTodoList,getInputChangeAction, getAddItemAction, getDeleteItemAction} from './store/actionCreators'
+
 // const data = [
 //     'Racing car sprays burning fuel into crowd.'];
 
@@ -34,6 +36,11 @@ class Antd extends Component {
             handleItemDelet = {this.handleItemDelet}
             />
         )
+    }
+
+    componentDidMount() {
+        const action = getTodoList();
+        store.dispatch(action);    
     }
 
     handleInputChange(e){
@@ -66,5 +73,6 @@ class Antd extends Component {
         store.dispatch(action);
         console.log('传递下标 删除项')
     }
+
 }
 export default Antd;

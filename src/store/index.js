@@ -1,10 +1,13 @@
-import { createStore } from 'redux';
+import { createStore,applyMiddleware,compose} from 'redux';
 import reducer from './reducer';
+import thunk from 'redux-thunk';
+
+const composeEhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+const enhancer = composeEhancers(
+    applyMiddleware(thunk)
+);
 
 const store = createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //启用redux chrome插件
-    );
-
+    reducer,enhancer);
 
 export default store;
